@@ -51,6 +51,7 @@ var correctAnswers = 0;
 var quizOver = false;
 var iSelectedAnswer = [];
 var c = 180;
+var completeScoreList = [];
 
 document.addEventListener("DOMContentLoaded", function() {
     displayCurrentQuestion();
@@ -218,7 +219,9 @@ function hideScore() {
 
 function displayScoreList() {
     var myWindow = window.open("", "", "width=400,height=100");
-    myWindow.document.write(nameTyped + " : " + correctAnswers);
+    var currentScore = nameTyped + " : " + correctAnswers;
+    completeScoreList.push(currentScore);
+    myWindow.document.write(completeScoreList);
 }
 
 function viewResults() {
