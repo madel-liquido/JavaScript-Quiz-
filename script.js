@@ -1,15 +1,12 @@
-//start quiz first page, highscores html (use score variable already here),subtract time when question is wrong
-//print wrong and correct? do i have to do that because I have previous and next and the other function
-//lines that need to  be checked: 123,60, 106
-//need to figure out radio input stuff and .remove method, 237,227
+var nameTyped = prompt("Welcome to the JavaScript Quiz! The quiz consists of 10 multiple choice questions and has an overall 3 minute time limit. Keep in mind that at the completion of the quiz, you will be able to view the solutions and attempt the quiz as many times as you would like. Please enter your name to proceed with the quiz.", "name");
 
 var questions = [{
         question: " 1. What is the HTML tag used to write JavaScript code?",
         choices: ["js", "javascript", "scripted", "script"],
         correctAnswer: 3
     }, {
-        question: " 2. Choose the correct JavaScript syntax to change the content of the following HTML code: <p id=\"geek\">GeeksforGeeks</p>",
-        choices: [" document.getElement(“geek”).innerHTML=”I am a Geek”;", "document.getElementById(“geek”).innerHTML=”I am a Geek”;", "document.getId(“geek”)=”I am a Geek”;", "document.getElementById(“geek”).innerHTML=I am a Geek;"],
+        question: " 2. Which was the first browser to support JavaScript?",
+        choices: ["Mozilla Firefox", "Netscape", "IE", "Google Chrome"],
         correctAnswer: 1
     },
     {
@@ -53,13 +50,13 @@ var viewingAns = 0;
 var correctAnswers = 0;
 var quizOver = false;
 var iSelectedAnswer = [];
-var c = 20;
+var c = 180;
 
 document.addEventListener("DOMContentLoaded", function() {
-    // Display the first question
     displayCurrentQuestion();
     var quizMessage = document.querySelector(".quizMessage");
     var preButton = document.querySelector(".preButton");
+    var viewScoresButton = document.querySelector(".viewScoresButton");
     quizMessage.style.display = 'none';
     preButton.getAttribute('disabled', 'disabled');
 
@@ -75,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             }
 
-            currentQuestion--; // Since we have already displayed the first question on DOM ready
+            currentQuestion--;
             if (currentQuestion < questions.length) {
                 displayCurrentQuestion();
 
@@ -88,24 +85,17 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-
-    // On clicking next, display the next question
     var nextButton = document.querySelector(".nextButton");
 
     nextButton.addEventListener("click", function() {
         if (!quizOver) {
-            //if quiz not over 
-            //var selectedAnswer = $("input[type='radio']:checked").val();
-            //query selector for radio groups
-            var selectedAnswer = document.querySelector("input[type='radio']:checked").value;
-            console.log('selected anser: ', selectedAnswer)
+            var selectedAnswer = $("input[type='radio']:checked").val();
 
             if (selectedAnswer == undefined) {
                 quizMessage.textContent = "Please select an answer";
                 quizMessage.style.display = '';
 
             } else {
-                // TODO: Remove any message -> not sure if this is efficient to call this each time....
                 quizMessage.style.display = 'none';
                 if (selectedAnswer == questions[currentQuestion].correctAnswer) {
                     correctAnswers++;
@@ -114,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 currentQuestion++;
                 if (currentQuestion >= 1) {
-                    //$('.preButton').prop("disabled", false);
+
                     preButton.getAttribute("disabled", false);
                 }
                 if (currentQuestion < questions.length) {
@@ -132,13 +122,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
 
-        } else { // quiz is over and clicked the next button (which now displays 'Play Again?'
+        } else {
             quizOver = false;
             iTimeShow.innerHTML = "Time Remaining:";
             iSelectedAnswer = [];
             nextButton.textContent = "Next Question";
             preButton.textContent = "Previous Question";
-            //document.getElementById("preButton").setAttribute('disabled', 'disabled');
             resetQuiz();
             viewingAns = 1;
             displayCurrentQuestion();
@@ -169,7 +158,6 @@ function quizTimer() {
         preButton.textContent = "View Answer";
         var nextButton = document.querySelector(".nextButton");
         nextButton.textContent = "Play Again?";
-        //$(document).find(".nextButton").text("Play Again?");
         quizOver = true;
         return false;
 
@@ -182,9 +170,7 @@ function quizTimer() {
 }
 
 
-// This displays the current question AND the choices
 function displayCurrentQuestion() {
-
     if (c == 185) {
         c = 180;
         quizTimer();
@@ -194,13 +180,7 @@ function displayCurrentQuestion() {
     var choiceList = document.querySelector(".quizContainer > .choiceList");
     var numChoices = questions[currentQuestion].choices.length;
 
-
     questionClass.textContent = question;
-    // Set the questionClass text to the current question
-
-    // Remove all current <li> elements (if any)
-    //var test = choiceList.find("li");
-    //test.removeC();
 
     $(choiceList).find("li").remove();
     var choice;
@@ -210,19 +190,9 @@ function displayCurrentQuestion() {
         choice = questions[currentQuestion].choices[i];
 
         if (iSelectedAnswer[currentQuestion] == i) {
-            //var correctCheck = document.querySelector('<li><input type="radio" class="radio-inline" checked="checked"  value=' + i + ' name="dynradio" />' + ' ' + choice + '</li>');
-            //correctCheck.appendTo(choiceList);
             $('<li><input type="radio" class="radio-inline" checked="checked"  value=' + i + ' name="dynradio" />' + ' ' + choice + '</li>').appendTo(choiceList);
-            // var radioButton = document.createElement("input");
-            // radioButton.setAttribute("type", "radio")
-            // radioButton.setAttribute("name", "name " + i)
-            // choiceList.appendChild(radioButton)
-            // console.log('radiobutton ', radioButton.checked)
-            //create list item, append radio items 
 
         } else {
-            //var wrongCheck = document.querySelector('<li><input type="radio" class="radio-inline" value=' + i + ' name="dynradio" />' + ' ' + choice + '</li>');
-            //wrongCheck.appendChild(choiceList);
             $('<li><input type="radio" class="radio-inline" value=' + i + ' name="dynradio" />' + ' ' + choice + '</li>').appendTo(choiceList);
         }
     }
@@ -231,7 +201,8 @@ function displayCurrentQuestion() {
 function resetQuiz() {
     currentQuestion = 0;
     correctAnswers = 0;
-    hideScore();
+    hideScore()
+    var nameTyped = prompt("Welcome to the JavaScript Quiz! The quiz consists of 10 multiple choice questions and has an overall 3 minute time limit. Keep in mind that at the completion of the quiz, you will be able to view the solutions and attempt the quiz as many times as you would like. Please enter your name to proceed with the quiz.", "name");;
 }
 
 function displayScore() {
@@ -245,7 +216,11 @@ function hideScore() {
     hiddenScore.style.display = 'none';
 }
 
-// This displays the current question AND the choices
+function displayScoreList() {
+    var myWindow = window.open("", "", "width=400,height=100");
+    myWindow.document.write(nameTyped + " : " + correctAnswers);
+}
+
 function viewResults() {
 
     if (currentQuestion == 10) { currentQuestion = 0; return false; }
@@ -257,21 +232,14 @@ function viewResults() {
     var choiceList = document.querySelector(".quizContainer > .choiceList");
     var numChoices = questions[currentQuestion].choices.length;
 
-    // Set the questionClass text to the current question
     questionClass.textContent = question;
-    //choiceList.querySelector("li").parentNode.removeChild(choiceList.querySelector("li"));
-
-    // Remove all current <li> elements (if any)
     $(choiceList).find("li").remove();
-    var choice;
 
-    //checking answers at the end
     for (i = 0; i < numChoices; i++) {
         choice = questions[currentQuestion].choices[i];
 
         if (iSelectedAnswer[currentQuestion] == i) {
             if (questions[currentQuestion].correctAnswer == i) {
-                //('<li style="border:2px solid green;margin-top:10px;"><input type="radio" class="radio-inline" checked="checked"  value=' + i + ' name="dynradio" />' + ' ' + choice + '</li>').appendChild(choiceList);
                 $('<li style="border:2px solid green;margin-top:10px;"><input type="radio" class="radio-inline" checked="checked"  value=' + i + ' name="dynradio" />' + ' ' + choice + '</li>').appendTo(choiceList);
             } else {
                 $('<li style="border:2px solid red;margin-top:10px;"><input type="radio" class="radio-inline" checked="checked"  value=' + i + ' name="dynradio" />' + ' ' + choice + '</li>').appendTo(choiceList);
@@ -291,22 +259,3 @@ function viewResults() {
         viewResults();
     }, 3000);
 }
-
-//function displayStartPage() {
-//    var contentId = document.getElementById("content");
-//Creating h1 for displaying game name/questions
-//   var questionH1 = createElement("h1", "id", "h1", "Coding Quiz Challenge");
-//appendChild(contentId, questionH1);
-
-//Creating Description of Quiz
-//   var descriptionDiv = createElement("p", "id", "description", "Try to answer the following code - related questions within the time limit. Keep in mind that incorrect answers will penalize your scoretime by ten seconds!");
-//   appendChild(contentId, descriptionDiv);
-
-//Creating Button to Start Quiz, needing to add one more Attribute to this one
-//   var startButton = createElement("button", "id", "start-quiz", "Start Quiz");
-//   startButton.setAttribute("type", "button");
-//   appendChild(contentId, startButton);
-
-//  document.getElementById("start-quiz").addEventListener("click", startQuiz);
-//}
-//displayStartPage();

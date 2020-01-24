@@ -14,19 +14,24 @@
 
 
 <body>
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <h4><span id="iTimeShow">Time Remaining: </span><br/><span id='timer'></span><button onclick="displayScoreList()" class="viewScoresButton">Scores</button></h4>
+    </nav>
     <div class="quizContainer container-fluid well well-lg">
         <div id="quiz1" class="text-center">
-            <h4><span id="iTimeShow">Time Remaining: </span><br/><span id='timer'></span></h4>
             <img class="img-responsive" src="https://wildcardcorp.com/image-repository/javascript-icon.png/@@images/image.png">
             <h1>Quiz</h1>
         </div>
+
 
         <div class="question"></div>
         <ul class="choiceList"></ul>
         <div class="quizMessage"></div>
         <div class="result"></div>
-        <button class="preButton" id="preButton">Previous Question</button>
-        <button class="nextButton">Next Question</button>
+        <div class="Buttons">
+            <button class="preButton" id="preButton">Previous Question</button>
+            <button class="nextButton">Next Question</button>
+        </div>
     </div>
     <script src="./script.js"></script>
 </body>
