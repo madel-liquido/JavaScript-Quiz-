@@ -1,51 +1,48 @@
-//correct answer is index of the array
-//add inner text function for correct! and wrong
-//convert to javascript then commit and summarize what's missing
 //start quiz first page, highscores html (use score variable already here),subtract time when question is wrong
 //print wrong and correct? do i have to do that because I have previous and next and the other function
 //lines that need to  be checked: 123,60, 106
-//need to figure out radio input stuff and .remove method, 237
+//need to figure out radio input stuff and .remove method, 237,227
 
 var questions = [{
-        question: "1. Some question",
-        choices: ["wrong", "wrong", "wrong", "correct"],
+        question: " 1. What is the HTML tag used to write JavaScript code?",
+        choices: ["js", "javascript", "scripted", "script"],
         correctAnswer: 3
     }, {
-        question: "2. Some question",
-        choices: ["wrong", "correct", "wrong", "wrong"],
+        question: " 2. Choose the correct JavaScript syntax to change the content of the following HTML code: <p id=\"geek\">GeeksforGeeks</p>",
+        choices: [" document.getElement(“geek”).innerHTML=”I am a Geek”;", "document.getElementById(“geek”).innerHTML=”I am a Geek”;", "document.getId(“geek”)=”I am a Geek”;", "document.getElementById(“geek”).innerHTML=I am a Geek;"],
         correctAnswer: 1
     },
     {
-        question: "3. Some question",
-        choices: ["wrong", "wrong", "wrong", "correct"],
+        question: " 3. Which of the following is the correct syntax to display “GeeksforGeeks” in an alert box using JavaScript?",
+        choices: ["alert(“GeeksforGeeks”)", "alertbox(“GeeksforGeeks”);", "msg(“GeeksforGeeks”);", "alert(“GeeksforGeeks”);"],
         correctAnswer: 3
     }, {
-        question: "4. Some question",
-        choices: ["wrong", "wrong", "correct", "wrong"],
+        question: " 4. What is the syntax for creating a function in JavaScript named as testFunction?",
+        choices: ["function = testFunction()", "function := testFunction()", "function testFunction()", "function : testFunction()"],
         correctAnswer: 2
     }, {
-        question: "5. Some question",
-        choices: ["correct", "wrong", "wrong", "wrong"],
+        question: " 5. What is the JavaScript syntax for printing values in Console?",
+        choices: ["console.log(5);", "print(5)", "console.print(5);", "print.console(5);"],
         correctAnswer: 0
     }, {
-        question: "6. Some question",
-        choices: ["wrong", "wrong", "correct", "wrong"],
+        question: " 6. How do you initialize an array in JavaScript?",
+        choices: ["var Geeks= “Geek1”, “Geek2”, “Geek3”", "var Geeks=(1:Geek1, 2:Geek2, 3:Geek3)", "var Geeks=[“Geek1”, “Geek2”, “Geek3”]", "var Geeks=(1=Geek1, 2=Geek2, 3=Geek3)"],
         correctAnswer: 2
     }, {
-        question: "7. Some question",
-        choices: ["wrong", "correct", "wrong", "wrong"],
+        question: " 7. What will be the command to print the number of characters in the string “GeeksforGeeks”?",
+        choices: ["document.write(“GeeksforGeeks”.len);", "document.write(“GeeksforGeeks”.length);", "document.write(sizeof(“GeeksforGeeks”));", "document.write(lenof(“GeeksforGeeks”));"],
         correctAnswer: 1
     }, {
-        question: "8. Some question",
-        choices: ["correct", "wrong", "wrong", "wrong"],
+        question: " 8. What is the method in JavaScript used to remove the whitespace at the beginning and end of any string ?",
+        choices: ["trim()", "strip()", "stripped()", "trimmed()"],
         correctAnswer: 0
     }, {
-        question: "9. Some question",
-        choices: ["wrong", "wrong", "correct", "wrong"],
+        question: " 9. Which of the following is an advantage of using JavaScript?",
+        choices: ["increased interactivity.", "Less server interaction.", "All of the above.", "Immediate feedback from the users."],
         correctAnswer: 2
     }, {
-        question: "10. Some question",
-        choices: ["wrong", "correct", "wrong", "wrong"],
+        question: " 10. JavaScript is a ________ Side Scripting Language.",
+        choices: ["Server", "Browser", "ISP", "None of the above"],
         correctAnswer: 1
     }
 ];
@@ -67,11 +64,6 @@ document.addEventListener("DOMContentLoaded", function() {
     preButton.getAttribute('disabled', 'disabled');
 
     quizTimer();
-
-    //will put in later
-    //  displayStartPage();{
-
-    // }
 
     preButton.addEventListener("click", function() {
 
@@ -103,8 +95,10 @@ document.addEventListener("DOMContentLoaded", function() {
     nextButton.addEventListener("click", function() {
         if (!quizOver) {
             //if quiz not over 
-            var selectedAnswer = $("input[type='radio']:checked").val();
-            //var selectedAnswer = document.querySelector("input[type='radio']:checked").value;
+            //var selectedAnswer = $("input[type='radio']:checked").val();
+            //query selector for radio groups
+            var selectedAnswer = document.querySelector("input[type='radio']:checked").value;
+            console.log('selected anser: ', selectedAnswer)
 
             if (selectedAnswer == undefined) {
                 quizMessage.textContent = "Please select an answer";
@@ -219,6 +213,13 @@ function displayCurrentQuestion() {
             //var correctCheck = document.querySelector('<li><input type="radio" class="radio-inline" checked="checked"  value=' + i + ' name="dynradio" />' + ' ' + choice + '</li>');
             //correctCheck.appendTo(choiceList);
             $('<li><input type="radio" class="radio-inline" checked="checked"  value=' + i + ' name="dynradio" />' + ' ' + choice + '</li>').appendTo(choiceList);
+            // var radioButton = document.createElement("input");
+            // radioButton.setAttribute("type", "radio")
+            // radioButton.setAttribute("name", "name " + i)
+            // choiceList.appendChild(radioButton)
+            // console.log('radiobutton ', radioButton.checked)
+            //create list item, append radio items 
+
         } else {
             //var wrongCheck = document.querySelector('<li><input type="radio" class="radio-inline" value=' + i + ' name="dynradio" />' + ' ' + choice + '</li>');
             //wrongCheck.appendChild(choiceList);
@@ -290,3 +291,22 @@ function viewResults() {
         viewResults();
     }, 3000);
 }
+
+//function displayStartPage() {
+//    var contentId = document.getElementById("content");
+//Creating h1 for displaying game name/questions
+//   var questionH1 = createElement("h1", "id", "h1", "Coding Quiz Challenge");
+//appendChild(contentId, questionH1);
+
+//Creating Description of Quiz
+//   var descriptionDiv = createElement("p", "id", "description", "Try to answer the following code - related questions within the time limit. Keep in mind that incorrect answers will penalize your scoretime by ten seconds!");
+//   appendChild(contentId, descriptionDiv);
+
+//Creating Button to Start Quiz, needing to add one more Attribute to this one
+//   var startButton = createElement("button", "id", "start-quiz", "Start Quiz");
+//   startButton.setAttribute("type", "button");
+//   appendChild(contentId, startButton);
+
+//  document.getElementById("start-quiz").addEventListener("click", startQuiz);
+//}
+//displayStartPage();
